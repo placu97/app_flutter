@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //LocationPermission locationPermission = await Geolocator.requestPermission();
   await Firebase.initializeApp(
-    //FlutterFire CLI 
+    //FlutterFire CLI - TODO - needs to be configured by it
     //options: DefaultFirebaseOptions.currentPlatform
     )
   .then((value) {
