@@ -1,14 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:velocity_x/velocity_x.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yoo/controller/controller.dart';
+import 'package:yoo/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //LocationPermission locationPermission = await Geolocator.requestPermission();
   await Firebase.initializeApp(
     //FlutterFire CLI - TODO - needs to be configured by it
-    //options: DefaultFirebaseOptions.currentPlatform
+    options: DefaultFirebaseOptions.currentPlatform
     )
   .then((value) {
     print("Main/ProjName: "+value.options.projectId);
@@ -57,14 +62,14 @@ class MyHomePage extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-       
+        centerTitle: true,
         title: Text("seeeeex"),
       ),
       body: Center(
         
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
+
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
@@ -73,6 +78,13 @@ class MyHomePage extends StatelessWidget {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             )),
+            //**** */
+            "Sign in w GOOGLE".text.xl3.make().onTap(() {
+              try {
+                signInWithGoogle();
+              }catch(w){print(w);}
+              })
+
           ],
         ),
       ),
@@ -83,4 +95,22 @@ class MyHomePage extends StatelessWidget {
       ), 
     );
   }
+}
+
+// Method
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn(clientId: DefaultFirebaseOptions.currentPlatform.iosClientId ).signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }
