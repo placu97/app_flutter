@@ -40,3 +40,10 @@ fatto. : passaggi:
 https://console.firebase.google.com/u/0/project/yoo-yoo-bfe2e/settings/general/android:com.example.yoo
 clicca su App ANdroid e inserisci le due chiavi OTTENUTE
 tramite comandi keytool, seguire istruzioni presenti sull apagina
+
+QUESTO COMMIT E' OK testato sia ios che android
+
+# nel prossimo commit: apple auth
+
+# nel prossimo commit: attuale implementazione UI - Login
+- 
