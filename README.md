@@ -43,6 +43,10 @@ tramite comandi keytool, seguire istruzioni presenti sull apagina
 
 QUESTO COMMIT E' OK testato sia ios che android
 
+
+## in quessto commit google + hotel
+
+
 # nel prossimo commit: apple auth
 
 # nel prossimo commit: attuale implementazione UI - Login
