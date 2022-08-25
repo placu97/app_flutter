@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:velocity_x/velocity_x.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yoo/controller/controller.dart';
 import 'package:yoo/firebase_options.dart';
+import 'package:yoo/screens/hotel/hotel_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +23,8 @@ void main() async {
   .then((value) {
     print("Main/ProjName: "+value.options.projectId);
     Get.put(Controller());
-  });
-  runApp(const MyApp());
+  }).then((value) => runApp(const MyApp()) );
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -28,8 +33,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness:
+          !kIsWeb && Platform.isAndroid ? Brightness.light : Brightness.light,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarDividerColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         
         primarySwatch: Colors.blue,
@@ -80,10 +94,10 @@ class MyHomePage extends StatelessWidget {
             )),
             //**** */
             "Sign in w GOOGLE".text.xl3.make().onTap(() {
-              try {
-                signInWithGoogle();
-              }catch(w){print(w);}
-              })
+                signInWithGoogle();        
+              }),
+
+              "to Prova screen".text.xl4.make().onTap(() {Get.to(()=> HotelHomeScreen()); })
 
           ],
         ),
@@ -106,6 +120,7 @@ Future<UserCredential> signInWithGoogle() async {
   final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
   // Create a new credential
+  try {
   final credential = GoogleAuthProvider.credential(
     accessToken: googleAuth?.accessToken,
     idToken: googleAuth?.idToken,
@@ -113,4 +128,6 @@ Future<UserCredential> signInWithGoogle() async {
 
   // Once signed in, return the UserCredential
   return await FirebaseAuth.instance.signInWithCredential(credential);
+  }catch(e) {debugPrint(e.toString());}
+  return Future.delayed(1.milliseconds);
 }
