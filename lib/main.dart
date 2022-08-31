@@ -11,6 +11,11 @@ import 'package:velocity_x/velocity_x.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yoo/controller/controller.dart';
 import 'package:yoo/firebase_options.dart';
+import 'package:yoo/screens/diegoVelop/anim.dart';
+import 'package:yoo/screens/anim2.dart';
+import 'package:yoo/screens/diegoVelop/anim_test_fl.dart';
+import 'package:yoo/screens/diegoVelop/official.dart';
+import 'package:yoo/screens/fliper_screens.dart';
 import 'package:yoo/screens/hotel/hotel_screen.dart';
 
 void main() async {
@@ -41,6 +46,7 @@ class MyApp extends StatelessWidget {
       systemNavigationBarColor: Colors.white,
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
+      
     ));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -97,8 +103,18 @@ class MyHomePage extends StatelessWidget {
                 signInWithGoogle();        
               }),
 
-              "to Prova screen".text.xl4.make().onTap(() {Get.to(()=> HotelHomeScreen()); })
+              "to Prova screen".text.xl4.make().onTap(() {Get.to(()=> HotelHomeScreen()); }),
 
+              "to Animmm".text.xl4.make().onTap(() {Get.to(()=> AnimScreen()); }),
+              "to Animmm 22222".text.xl4.make().onTap(() {Get.to(()=> Anim2Screen()); }),
+              "to Animmm OFFIZIEL".text.xl4.make().onTap(() {Get.to(()=> CardsHome()); }),
+
+              100.heightBox,
+
+              "to FlipprScreenSide".text.xl4.make().onTap(() {Get.to(() => FliperScreen());}),
+
+              "to ANimTest".text.xl5.make().onTap(() {Get.to(()=> AnimatedContainerAppe());})
+              //-----
           ],
         ),
       ),

@@ -19,6 +19,7 @@ dependencies:
   #STATE-UI-CORE
   flutter_native_splash: ^2.2.8
   get: ^4.6.5
+  flutter_hooks: ^0.18.5+1
   velocity_x: ^3.4.0
   font_awesome_flutter: ^10.1.0
   flutter_rating_bar: ^4.0.1
