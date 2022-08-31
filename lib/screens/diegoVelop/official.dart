@@ -21,15 +21,9 @@ class CardsHome extends StatelessWidget {
   }
 }//main
 
-class CardsBody extends StatefulWidget {
+class CardsBody extends StatelessWidget {
 
-  @override
-  State<CardsBody> createState() => _CardsBodyState();
-}
-
-class _CardsBodyState extends State<CardsBody> {
-
-  double _value = 0.0;
+  Rx<double> _value = 0.0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +35,15 @@ class _CardsBodyState extends State<CardsBody> {
           child: Stack(
             children: [
 
-              ...List.generate(4, (index) => Card3DItem(height: constraints.maxHeight / 2,card: cardList[index], percent: _value)).reversed,
-              Positioned(
+             ...List.generate(4, (index) => Obx( ()=> Card3DItem(height: constraints.maxHeight / 2,card: cardList[index], percent: _value.value) ) ).reversed ,
+             Obx(() =>  Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Slider(value: _value, onChanged: (val) { setState(() {
-                  _value = val;
-                });} ),
-              )
+                child: Slider(value: _value.value, onChanged: (val) { 
+                  _value.value = val;
+                } ),
+              ))
 
             ]
           ),
@@ -102,7 +96,7 @@ class Card3DItem extends StatelessWidget {
     return Positioned(
       left: 0,
       right: 0,
-      top: height + 30 * percent,
+      top: height + 30 * percent,//funzione controllo altezza
       child: SizedBox(
         height: height,
         child: Card3DWidget(card: card,),
