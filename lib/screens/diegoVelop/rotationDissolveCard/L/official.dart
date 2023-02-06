@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:get/get.dart';
-import 'package:yoo/screens/diegoVelop/model/cards_model.dart';
+import 'package:yoo/screens/diegoVelop/rotationDissolveCard/model/cards_model.dart';
 
 class CardsHome extends StatelessWidget {
 
