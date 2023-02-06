@@ -47,3 +47,5 @@ QUESTO COMMIT E' OK testato sia ios che android
 
 # nel prossimo commit: attuale implementazione UI - Login
 - 
+
+DIEGOVELOPER FOLLOWUP
